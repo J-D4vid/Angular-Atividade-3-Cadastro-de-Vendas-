@@ -30,10 +30,12 @@ export class BarsChartComponent implements OnInit {
 
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-
+  
+  total: number = 0
   entradas: number = 0
   saidas: number = 0
   valores: Carteira[] = [];
+  Quantidade: number = 0
 
   constructor() {
     this.chartOptions = {
@@ -44,6 +46,10 @@ export class BarsChartComponent implements OnInit {
         },
         {
           name: "Saída",
+          data: [0]
+        },
+        {
+          name: "total",
           data: [0]
         }
       ],
@@ -63,7 +69,7 @@ export class BarsChartComponent implements OnInit {
         enabled: false,
         offsetX: -6,
         style: {
-          fontSize: "12px",
+          fontSize: "20px",
           colors: ["#fff"]
         }
       },
@@ -73,7 +79,7 @@ export class BarsChartComponent implements OnInit {
         colors: ["#fff"]
       },
       xaxis: {
-        categories: ['Entrada', 'Saída']
+        categories: ['Entrada', 'Saída','total']
       }
     };
   }
@@ -93,12 +99,17 @@ export class BarsChartComponent implements OnInit {
 
       this.entradas = 0
       this.saidas = 0
+      this.Quantidade = 0
+      this.total = 0
   
       this.valores.map(res => {
         if (res.caixa === 'Saída') {
-          this.saidas += res.valor
+          this.saidas += res.valor * res.Quantidade
+          this.total = this.entradas - this.saidas
         } else {
-          this.entradas = this.entradas + res.valor
+          this.entradas = this.entradas + res.valor * res.Quantidade
+          this.total = this.entradas - this.saidas
+        
         }
       })
   
@@ -109,7 +120,12 @@ export class BarsChartComponent implements OnInit {
       {
         name: "Saída",
         data: [this.saidas]
-      }]
+      },
+      {
+        name: "Total",
+        data: [this.total]
+      }
+    ]
     }
 
   }

@@ -1,11 +1,20 @@
+<header>
+    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fyt3.ggpht.com%2Fa%2FAATXAJw7PbgwD2CNCGEmktT4zKkxLPALfT3bpG6uVg%3Ds900-c-k-c0xffffffff-no-rj-mo&f=1&nofb=1" width="100px" height="100px">
+    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.-MD8zNhyDO_Ec6cAPlYG_gHaCu%26pid%3DApi&f=1"
+    width="100px" height="60px">
+    <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.4iCmWumBiuJAyNKAoem28wHaHa%26pid%3DApi&f=1"
+    width="100px" height="100px">
+   
+</header>
 <div style="background:transparent !important" class="jumbotron">
     <form #carteiraForm="ngForm" (ngSubmit)="salvarValor()">
         <div class="row justify-content-center">
             <div class="col-sm-9">
-                <h1 class="display-4">Carteira Virtual</h1>
-                <p class="lead">Um simples auxiliar pra manter a grana no bolso! 💲</p>
+                <h1 class="display-4">Assistente de Finanças</h1>
+                <p class="lead">Um simples auxiliar para lhe ajudar a organizar seu dinheiro!</p>
             </div>
         </div>
+       
         <div class="row justify-content-center">
             <div class="col-lg-4">
                 <div class="input-group mb-3">
@@ -15,12 +24,20 @@
                     <input name="valor" class="form-control" type="number" [(ngModel)]="carteira.valor"
                         #valor="ngModel" required>
 
-                    <select class="form-control" id="moneyOption" name="caixa" [(ngModel)]="carteira.caixa"
+                    <select class="form-control" id="moneyOption" name="caixa" placeholder="selecionar" [(ngModel)]="carteira.caixa" 
                         #caixa="ngModel" required>
-                        <option disabled selected value> Fluxo de Caixa </option>
+                        <option disabled selected value>selecionar</option>
                         <option>Entrada</option>
                         <option>Saída</option>
                     </select>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Quantidade</span>
+                    </div>
+                    <input name="Quantidade" class="form-control" type="number"
+                    [(ngModel)]="carteira.Quantidade" #Quantidade="ngModel" required>
                 </div>
                 <div class="form-group">
                     <label for="descricao">Descrição do Valor <em>*</em></label>
@@ -33,6 +50,22 @@
                         [(ngModel)]="carteira.data_valor" #data_valor="ngModel" required 
                         min='2021-01-01' onkeydown="return false">
                 </div>
+                <div class="row jutify-content-left">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                        <label for="Nome">Nome<em>*</em></label>
+                        <input type="email" name="Nome" class="form-control" id="Nome" 
+                        [(ngModel)]="carteira.Nome" #Nome="ngModel"
+                        required>
+                    </div>
+                    <div>
+                        <label for="Contato">Contato<em>*</em></label>
+                        <input name="Contato" class="form-control" type="number" placeholder="988670727"
+                        [(ngModel)]="carteira.Contato" #Contato="ngModel" required>
+                    </div>
+                </div>
+                </div>
+                <br>
 
                 <div class="d-flex justify-content-end">
                     <p class="lead">
@@ -49,6 +82,9 @@
                             <th scope="col">Descrição</th>
                             <th scope="col">Data</th>
                             <th scope="col">Valor</th>
+                            <th scope="col">Quantidade</th>
+                            <th scope="col">Nome</th>
+                            <th scope="col">Contato</th>
                             <th scope="col">Opções</th>
                         </tr>
                     </thead>
@@ -58,9 +94,14 @@
                             <td>{{index.descricao}}</td>
                             <td>{{index.data_valor | date: 'dd/MM/yyyy'}}</td>
                             <td>R${{index.valor}}</td>
+                            <td>{{index.Quantidade}}</td>
+                            <td>{{index.Nome}}</td>
+                            <td>{{index.Contato}}</td>
                             <td><i class="bi bi-pen" (click)="editarRegistro(index.id)"> </i> | <i
-                                    class="bi bi-x-circle" (click)="deletaRegistro(index)"></i></td>
+                                class="bi bi-x-circle" (click)="deletaRegistro(index)"></i></td>
                         </tr>
+                        <br>
+                        <br>
                     </tbody>
                 </table>
             </div>

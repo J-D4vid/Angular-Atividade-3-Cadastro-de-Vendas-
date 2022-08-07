@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   carteiras = []
   carteira: Carteira = new Carteira
   valores: Carteira[] = []
+  total: number;
 
   ngOnInit(): void {
     this.getLocalStorage()
@@ -32,6 +33,10 @@ export class HomeComponent implements OnInit {
           this.carteiras[indiceCarteira].valor = this.carteira.valor
           this.carteiras[indiceCarteira].caixa = this.carteira.caixa
           this.carteiras[indiceCarteira].data_valor = this.carteira.data_valor
+          this.carteiras[indiceCarteira].Quantidade = this.carteira.Quantidade
+          this.carteiras[indiceCarteira].Nome = this.carteira.Nome
+          this.carteiras[indiceCarteira].Contato = this.carteira.Contato
+          this.total[indiceCarteira].total= this.carteira.total
         }
       }
 
@@ -53,8 +58,12 @@ export class HomeComponent implements OnInit {
         this.carteira.id = this.carteiras[carteira].id
         this.carteira.descricao = this.carteiras[carteira].descricao
         this.carteira.valor = this.carteiras[carteira].valor
+        this.carteira.Quantidade = this.carteiras[carteira].Quantidade
+        this.carteira.Nome = this.carteiras[carteira].Nome
+        this.carteira.Contato = this.carteiras[carteira].Contato
         this.carteira.caixa = this.carteiras[carteira].caixa
         this.carteira.data_valor = this.carteiras[carteira].data_valor
+        this.carteira.total= this.carteiras[carteira].total
       }
     }
 
